@@ -13,7 +13,7 @@
 	<ApplicationIcon>icon.ico</ApplicationIcon>
 
 	<Authors>Иван Титов</Authors>
-	<Version>2026.11.05</Version>
+	<Version>2026.11.06</Version>
 	<Description>Автоматическая печать рекламных материалов после завершения пользовательских заданий печати.</Description>
 
     <ImplicitUsings>enable</ImplicitUsings>
@@ -26,6 +26,11 @@
 
   <ItemGroup>
 	<None Update="icon.ico">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="LICENSE">
 	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</None>
   </ItemGroup>

@@ -511,8 +511,10 @@ public sealed class TrayApplicationContext : ApplicationContext
         MessageBox.Show(
             $"Ticket Promo\n\n" +
             $"{description}\n\n" +
-            $"Версия: {version}\n" +
-            $"Разработчик: {developer}",
+            $"Версия: {version}\n\n" +
+            $"© 2026 {developer}\n" +
+            "Лицензия: MIT License\n\n" +
+            "GitHub: https://github.com/Ivanoka/TicketPromo",
             "О программе",
             MessageBoxButtons.OK,
             MessageBoxIcon.Information);

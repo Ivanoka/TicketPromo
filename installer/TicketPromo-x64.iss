@@ -1,5 +1,5 @@
 #define MyAppName "Ticket Promo"
-#define MyAppVersion "2026.11.05"
+#define MyAppVersion "2026.11.06"
 
 #define PublishDir "..\bin\Release\net10.0-windows\win-x64\publish"
 #define RuntimeInstaller "redist\windowsdesktop-runtime-10.0.14-win-x64.exe"
