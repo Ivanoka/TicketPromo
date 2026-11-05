@@ -18,6 +18,8 @@ OutputBaseFilename=TicketPromo-Setup-{#MyAppVersion}-x86
 PrivilegesRequired=admin
 ArchitecturesAllowed=x86
 
+CloseApplications=no
+
 SetupIconFile=assets\icon.ico
 UninstallDisplayIcon={app}\{#MyAppName}.exe
 
@@ -40,6 +42,7 @@ Name: "{commonappdata}\{#MyAppName}"; Permissions: users-modify
 
 [Icons]
 Name: "{commonstartup}\{#MyAppName}"; Filename: "{app}\{#MyAppName}.exe"; WorkingDir: "{app}"
+Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppName}.exe"
 
 [Run]
 Filename: "{tmp}\windowsdesktop-runtime-10.0.14-win-x86.exe"; Parameters: "/install /quiet /norestart"; StatusMsg: "Установка .NET 10 Desktop Runtime..."; Flags: waituntilterminated
@@ -49,4 +52,12 @@ Filename: "{app}\{#MyAppName}.exe"; Description: "Запустить {#MyAppName
 Type: filesandordirs; Name: "{commonappdata}\{#MyAppName}"
 
 [UninstallRun]
-Filename: "{sys}\taskkill.exe"; Parameters: "/F /IM ""Ticket Promo.exe"""; Flags: runhidden waituntilterminated
+Filename: "{sys}\taskkill.exe"; Parameters: "/F /T /IM ""Ticket Promo.exe"""; Flags: runhidden waituntilterminated
+
+[Code]
+function PrepareToInstall(var NeedsRestart: Boolean): String;
+var
+  ResultCode: Integer;
+begin
+  Exec(ExpandConstant('{sys}\taskkill.exe'), '/F /T /IM "Ticket Promo.exe"', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+end;
