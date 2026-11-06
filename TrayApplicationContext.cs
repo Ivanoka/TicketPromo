@@ -13,6 +13,7 @@ public sealed class TrayApplicationContext : ApplicationContext
     private readonly AppConfig _config;
     private readonly NotifyIcon _notifyIcon;
     private readonly ToolStripMenuItem _printerMenu;
+    private readonly ToolStripMenuItem _printingEnabledMenu;
     private readonly Control _uiDispatcher;
 
     private CancellationTokenSource? _monitorCts;
@@ -53,12 +54,25 @@ public sealed class TrayApplicationContext : ApplicationContext
         _printerMenu = new ToolStripMenuItem("Принтер");
         UpdatePrinterMenu();
 
+        _printingEnabledMenu = new ToolStripMenuItem("Автоматическая печать")
+        {
+            CheckOnClick = true,
+            Checked = _config.PrintingEnabled
+        };
+
+        _printingEnabledMenu.Click += (_, _) =>
+            TogglePrintingEnabled();
+
         contextMenu.Items.Add(_printerMenu);
 
         contextMenu.Items.Add(
             "Выбрать изображение...",
             null,
             async (_, _) => await SelectImageAsync());
+
+        contextMenu.Items.Add(new ToolStripSeparator());
+
+        contextMenu.Items.Add(_printingEnabledMenu);
 
         contextMenu.Items.Add(new ToolStripSeparator());
 
@@ -329,6 +343,37 @@ public sealed class TrayApplicationContext : ApplicationContext
         {
             _isChangingSettings = false;
         }
+    }
+
+    private void TogglePrintingEnabled()
+    {
+        bool previousValue = _config.PrintingEnabled;
+        bool newValue = _printingEnabledMenu.Checked;
+
+        _config.PrintingEnabled = newValue;
+
+        try
+        {
+            _config.Save();
+        }
+        catch (Exception ex)
+        {
+            _config.PrintingEnabled = previousValue;
+            _printingEnabledMenu.Checked = previousValue;
+
+            Notify(
+                "Ошибка Ticket Promo",
+                $"Не удалось сохранить настройку автоматической печати: {ex.Message}",
+                NotificationType.Error);
+
+            return;
+        }
+
+        Notify(
+            "Ticket Promo",
+            newValue
+                ? "Автоматическая печать включена."
+                : "Автоматическая печать отключена.");
     }
 
     private void StartMonitoring()

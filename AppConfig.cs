@@ -7,11 +7,9 @@ namespace TicketPromo;
 public sealed class AppConfig
 {
     public string PrinterName { get; set; } = string.Empty;
-
     public string ImagePath { get; set; } = string.Empty;
-
+    public bool PrintingEnabled { get; set; } = true;
     public int CheckInterval { get; set; } = 50;
-
     public int QueueIdleDelay { get; set; } = 500;
     public float ImageWidth { get; set; } = 70;
     public float MarginLeft { get; set; } = 0;

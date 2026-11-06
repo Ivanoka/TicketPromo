@@ -68,25 +68,33 @@ public sealed class PrinterMonitor
             {
                 _imageMissingWarningShown = false;
 
-                OnLog?.Invoke("Отправка рекламного изображения на печать...");
-
-                try
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
-
-                    _printer.Print();
-
-                    OnLog?.Invoke(
-                        "Рекламное изображение успешно отправлено на печать.");
-                }
-                catch (OperationCanceledException)
-                {
-                    throw;
-                }
-                catch (Exception ex)
+                if (!_config.PrintingEnabled)
                 {
                     OnLog?.Invoke(
-                        $"Ошибка печати рекламного изображения: {ex}");
+                        "Автоматическая печать отключена. Рекламное задание пропущено.");
+                }
+                else
+                {
+                    OnLog?.Invoke("Отправка рекламного изображения на печать...");
+
+                    try
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+
+                        _printer.Print();
+
+                        OnLog?.Invoke(
+                            "Рекламное изображение успешно отправлено на печать.");
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        throw;
+                    }
+                    catch (Exception ex)
+                    {
+                        OnLog?.Invoke(
+                            $"Ошибка печати рекламного изображения: {ex}");
+                    }
                 }
             }
 
