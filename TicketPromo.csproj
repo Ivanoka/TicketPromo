@@ -13,7 +13,7 @@
 	<ApplicationIcon>icon.ico</ApplicationIcon>
 
 	<Authors>Иван Титов</Authors>
-	<Version>2026.11.06</Version>
+	<Version>2026.11.06.1</Version>
 	<Description>Автоматическая печать рекламных материалов после завершения пользовательских заданий печати.</Description>
 
     <ImplicitUsings>enable</ImplicitUsings>
