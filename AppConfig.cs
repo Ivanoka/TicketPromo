@@ -10,9 +10,9 @@ public sealed class AppConfig
 
     public string ImagePath { get; set; } = string.Empty;
 
-    public int CheckInterval { get; set; } = 300;
+    public int CheckInterval { get; set; } = 50;
 
-    public int QueueIdleDelay { get; set; } = 1500;
+    public int QueueIdleDelay { get; set; } = 500;
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
