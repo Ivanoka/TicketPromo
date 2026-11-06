@@ -103,6 +103,12 @@ public sealed class TrayApplicationContext : ApplicationContext
                 "Файл рекламного изображения не найден. Выберите PNG через меню.",
                 NotificationType.Warning);
         }
+        else
+        {
+            Notify(
+                "Ticket Promo",
+                "Программа успешно запущена и работает в фоновом режиме.");
+        }
     }
 
     private static string ResolvePrinter(string configuredPrinter)
