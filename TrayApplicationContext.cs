@@ -552,7 +552,7 @@ public sealed class TrayApplicationContext : ApplicationContext
              ?? "Не указано";
 
         string version =
-            assembly.GetName().Version?.ToString(3)
+            assembly.GetName().Version?.ToString()
             ?? "Неизвестно";
 
         string developer =
