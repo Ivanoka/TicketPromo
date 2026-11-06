@@ -44,19 +44,17 @@ public sealed class AdvertisementPrinter
 
         document.PrintPage += (_, e) =>
         {
-            Rectangle bounds = e.PageBounds;
+            Graphics graphics = e.Graphics!;
 
-            float scale = Math.Min(
-                (float)bounds.Width / image.Width,
-                (float)bounds.Height / image.Height);
+            graphics.PageUnit = GraphicsUnit.Millimeter;
 
-            int width = (int)(image.Width * scale);
-            int height = (int)(image.Height * scale);
+            float x = _config.MarginLeft;
+            float y = _config.MarginTop;
 
-            int x = (bounds.Width - width) / 2;
-            int y = (bounds.Height - height) / 2;
+            float width = _config.ImageWidth;
+            float height = width * image.Height / image.Width;
 
-            e.Graphics?.DrawImage(
+            graphics.DrawImage(
                 image,
                 x,
                 y,

@@ -2,5 +2,8 @@
   "PrinterName": "",
   "ImagePath": "C:\\ProgramData\\Ticket Promo\\qr-code.png",
   "CheckInterval": 50,
-  "QueueIdleDelay": 500
+  "QueueIdleDelay": 500,
+  "ImageWidth": 70,
+  "MarginLeft": 5,
+  "MarginTop": 0
 }

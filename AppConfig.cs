@@ -13,6 +13,9 @@ public sealed class AppConfig
     public int CheckInterval { get; set; } = 50;
 
     public int QueueIdleDelay { get; set; } = 500;
+    public float ImageWidth { get; set; } = 70;
+    public float MarginLeft { get; set; } = 0;
+    public float MarginTop { get; set; } = 0;
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -62,6 +65,24 @@ public sealed class AppConfig
         {
             throw new InvalidDataException(
                 "Задержка очереди (QueueIdleDelay) не может быть отрицательной.");
+        }
+
+        if (config.ImageWidth < 0)
+        {
+            throw new InvalidDataException(
+                "Ширина картинки (ImageWidth) не может быть отрицательной.");
+        }
+
+        if (config.MarginTop < 0)
+        {
+            throw new InvalidDataException(
+                "Отступ печати (MarginTop) не может быть отрицательным.");
+        }
+
+        if (config.MarginLeft < 0)
+        {
+            throw new InvalidDataException(
+                "Отступ печати (MarginLeft) не может быть отрицательным.");
         }
 
         // Преобразуем относительный путь в абсолютный.
